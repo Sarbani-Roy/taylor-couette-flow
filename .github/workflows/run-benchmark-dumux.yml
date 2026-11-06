@@ -72,7 +72,7 @@ jobs:
 
       - name: Download benchmark resources artifact
         if: inputs.benchmark_artifact_name != ''
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: ${{ inputs.benchmark_artifact_name }}
           path: downloaded-benchmark
