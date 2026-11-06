@@ -1,0 +1,141 @@
+name: RoHub Integration CI
+
+# Runs the benchmark and uploads its aggregate RO-Crate to RoHub: every Friday to
+# the development RoHub, and on demand to the one the tick box chooses.
+# Needs, for that RoHub, the identifier of the benchmark's research object -- the
+# repository variable ROHUB_DEV_BENCHMARK_IDENTIFIER or ROHUB_PROD_BENCHMARK_IDENTIFIER
+# -- and the login as the secrets ROHUB_DEV_USERNAME, ROHUB_DEV_PASSWORD or
+# ROHUB_PROD_USERNAME, ROHUB_PROD_PASSWORD. benchmantic sets them up (--rohub);
+# without an identifier, the RoHub steps are skipped.
+
+on:
+  schedule:
+    - cron: '0 18 * * 5'
+
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: Branch to run and publish
+        required: true
+        default: main
+      download_from_rohub:
+        description: Download benchmark resources from RoHub instead of using local files
+        required: true
+        type: boolean
+        default: false
+      use_production_rohub:
+        description: Upload to production RoHub
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+env:
+  # the weekly run uses the development RoHub; a manual run, the tick box
+  USE_PRODUCTION_ROHUB: ${{ github.event_name != 'schedule' && inputs.use_production_rohub == true }}
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+      identifier: ${{ steps.check.outputs.identifier }}
+      production: ${{ env.USE_PRODUCTION_ROHUB }}
+    steps:
+      - name: Check the RoHub identifier
+        id: check
+        env:
+          DEV_IDENTIFIER: ${{ vars.ROHUB_DEV_BENCHMARK_IDENTIFIER }}
+          PROD_IDENTIFIER: ${{ vars.ROHUB_PROD_BENCHMARK_IDENTIFIER }}
+        run: |
+          if [ "${USE_PRODUCTION_ROHUB}" = "true" ]; then
+            kind=PROD; identifier="${PROD_IDENTIFIER}"
+          else
+            kind=DEV; identifier="${DEV_IDENTIFIER}"
+          fi
+          if [ -n "${identifier}" ]; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            echo "identifier=${identifier}" >> "$GITHUB_OUTPUT"
+            echo "Benchmark research object: ${identifier} (production RoHub: ${USE_PRODUCTION_ROHUB})"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::RoHub is not set up yet: set the repository variable ROHUB_${kind}_BENCHMARK_IDENTIFIER to the UUID of the benchmark's research object on RoHub."
+            echo "### RoHub skipped: no ROHUB_${kind}_BENCHMARK_IDENTIFIER yet" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+  prepare-benchmark:
+    needs: setup
+    if: needs.setup.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    env:
+      BENCHMARK_ROHUB_IDENTIFIER: ${{ needs.setup.outputs.identifier }}
+    steps:
+      - name: Checkout repo content
+        if: inputs.download_from_rohub
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.branch || github.ref_name }}
+
+      - name: Install semantic-benchmark
+        if: inputs.download_from_rohub
+        run: python -m pip install -r requirements.txt
+
+      - name: Select RoHub credentials
+        if: inputs.download_from_rohub
+        shell: bash
+        run: |
+          if [ "${USE_PRODUCTION_ROHUB}" = "true" ]; then
+            echo "ROHUB_USERNAME=${{ secrets.ROHUB_PROD_USERNAME }}" >> "${GITHUB_ENV}"
+            echo "ROHUB_PASSWORD=${{ secrets.ROHUB_PROD_PASSWORD }}" >> "${GITHUB_ENV}"
+          else
+            echo "ROHUB_USERNAME=${{ secrets.ROHUB_DEV_USERNAME }}" >> "${GITHUB_ENV}"
+            echo "ROHUB_PASSWORD=${{ secrets.ROHUB_DEV_PASSWORD }}" >> "${GITHUB_ENV}"
+          fi
+
+      - name: Download benchmark RO-Crate and JSON-LD from RoHub
+        if: inputs.download_from_rohub
+        shell: bash
+        run: |
+          mkdir -p "${GITHUB_WORKSPACE}/downloaded-benchmark"
+          rohub_args=()
+          if [ "${USE_PRODUCTION_ROHUB}" = "true" ]; then
+            rohub_args=(--use-production-rohub)
+          fi
+
+          download-semantic-benchmark \
+            --identifier "${BENCHMARK_ROHUB_IDENTIFIER}" \
+            --username "${ROHUB_USERNAME}" \
+            --password "${ROHUB_PASSWORD}" \
+            --path "${GITHUB_WORKSPACE}/downloaded-benchmark" \
+            --semantic-resource-filename "${GITHUB_WORKSPACE}/downloaded-benchmark/benchmark.json" \
+            "${rohub_args[@]}"
+
+      - name: Archive downloaded benchmark resources
+        if: inputs.download_from_rohub
+        uses: actions/upload-artifact@v7
+        with:
+          name: downloaded-benchmark-resources
+          path: downloaded-benchmark/
+
+  run-dumux:
+    needs: [setup, prepare-benchmark]
+    if: needs.setup.outputs.enabled == 'true'
+    uses: ./.github/workflows/run-benchmark-dumux.yml
+    with:
+      checkout_ref: ${{ inputs.branch || github.ref_name }}
+      benchmark_file: ${{ inputs.download_from_rohub && 'downloaded-benchmark/benchmark.json' || 'benchmark/1.0.0/minimal-configurations.json' }}
+      benchmark_artifact_name: ${{ inputs.download_from_rohub && 'downloaded-benchmark-resources' || '' }}
+
+  upload-dumux:
+    needs: [setup, run-dumux]
+    if: needs.setup.outputs.enabled == 'true'
+    uses: ./.github/workflows/upload-rocrate.yml
+    with:
+      software: dumux
+      display_name: DuMux
+      benchmark_rohub_identifier: ${{ needs.setup.outputs.identifier }}
+      checkout_ref: ${{ inputs.branch || github.ref_name }}
+      use_production_rohub: ${{ needs.setup.outputs.production == 'true' }}
+    secrets: inherit

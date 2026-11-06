@@ -1,0 +1,31 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata from this file."
+title: "Taylor-Couette Flow Benchmark"
+abstract: "A benchmark for the steady viscous flow between two concentric rotating cylinders (circular Couette flow, Re = 100), compared with the analytical solution on three successively refined grids."
+type: software
+authors:
+  - family-names: "Roy"
+    given-names: "Sarbani"
+    orcid: "https://orcid.org/0000-0002-5990-0076"
+    affiliation: "University of Stuttgart"
+version: "0.1.0"
+date-released: "2026-11-06"
+license: MIT
+repository-code: "https://github.com/Sarbani-Roy/taylor-couette-flow"
+url: "https://github.com/Sarbani-Roy/taylor-couette-flow"
+keywords:
+  - "benchmark"
+  - "computational fluid dynamics"
+  - "Taylor-Couette flow"
+  - "rotating cylinders"
+  - "NFDI4ING"
+  - "model validation"
+  - "FAIR4RS"
+  - "REUSE"
+references:
+  - type: software
+    title: "DuMux"
+    url: "https://dumux.org"
+  - type: software
+    title: "benchmantic"
+    url: "https://github.com/Simulation-Benchmarks/benchmantic"

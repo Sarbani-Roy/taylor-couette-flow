@@ -1,0 +1,37 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "taylor-couette-flow",
+  "description": "A benchmark for the steady viscous flow between two concentric rotating cylinders (circular Couette flow, Re = 100), compared with the analytical solution on three successively refined grids.",
+  "version": "0.1.0",
+  "dateCreated": "2026-11-06",
+  "license": "https://spdx.org/licenses/MIT",
+  "codeRepository": "https://github.com/Sarbani-Roy/taylor-couette-flow",
+  "issueTracker": "https://github.com/Sarbani-Roy/taylor-couette-flow/issues",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "Python"
+  },
+  "keywords": [
+    "benchmark",
+    "computational fluid dynamics",
+    "Taylor-Couette flow",
+    "rotating cylinders",
+    "NFDI4ING",
+    "model validation",
+    "FAIR4RS",
+    "REUSE"
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Sarbani",
+      "familyName": "Roy",
+      "@id": "https://orcid.org/0000-0002-5990-0076",
+      "affiliation": {
+        "@type": "Organization",
+        "name": "University of Stuttgart"
+      }
+    }
+  ]
+}

@@ -1,0 +1,973 @@
+{
+  "@context": {
+    "local": "https://github.com/Sarbani-Roy/taylor-couette-flow/",
+    "@vocab": "http://w3id.org/nfdi4ing/metadata4ing#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "schema": "http://schema.org/",
+    "cr": "http://mlcommons.org/croissant/",
+    "qudt": "http://qudt.org/schema/qudt/",
+    "m4i": "http://w3id.org/nfdi4ing/metadata4ing#",
+    "mathmod": "https://mardi4nfdi.github.io/MathModDB/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "obo": "http://purl.obolibrary.org/obo/",
+    "wd": "http://www.wikidata.org/entity/",
+    "unit": "http://qudt.org/vocab/unit/",
+    "quantitykind": "http://qudt.org/vocab/quantitykind/",
+    "sio": "http://semanticscience.org/resource/",
+    "label": {
+      "@id": "rdfs:label"
+    },
+    "Field": {
+      "@id": "cr:Field"
+    },
+    "file object": {
+      "@id": "cr:FileObject"
+    },
+    "method": {
+      "@id": "m4i:Method"
+    },
+    "numerical variable": {
+      "@id": "m4i:NumericalVariable"
+    },
+    "numerical parameter": {
+      "@id": "m4i:NumericalParameter"
+    },
+    "text parameter": {
+      "@id": "m4i:TextParameter"
+    },
+    "processing step": {
+      "@id": "m4i:ProcessingStep"
+    },
+    "tool": {
+      "@id": "m4i:Tool"
+    },
+    "has numerical value": {
+      "@id": "m4i:hasNumericalValue"
+    },
+    "has string value": {
+      "@id": "m4i:hasStringValue"
+    },
+    "has unit": {
+      "@id": "m4i:hasUnit"
+    },
+    "has quantity kind": {
+      "@id": "m4i:hasKindOfQuantity"
+    },
+    "has part": {
+      "@id": "obo:BFO_0000051"
+    },
+    "has input": {
+      "@id": "obo:RO_0002233"
+    },
+    "has output": {
+      "@id": "obo:RO_0002234"
+    },
+    "has employed tool": {
+      "@id": "m4i:hasEmployedTool"
+    },
+    "has configuration": {
+      "@id": "m4i:usesConfiguration"
+    },
+    "has parameter set": {
+      "@id": "m4i:hasParameterSet"
+    },
+    "evaluates": {
+      "@id": "m4i:evaluates"
+    },
+    "investigates": {
+      "@id": "m4i:investigates"
+    },
+    "uses": {
+      "@id": "wd:P2283"
+    },
+    "describedAsDocumentedBy": {
+      "@id": "mathmod:P104"
+    },
+    "extract": {
+      "@id": "cr:extract"
+    },
+    "jsonPath": {
+      "@id": "cr:jsonPath"
+    },
+    "source": {
+      "@id": "cr:source"
+    },
+    "represents": {
+      "@id": "sio:SIO_000210"
+    },
+    "identifier": {
+      "@id": "m4i:identifier"
+    },
+    "dataType": {
+      "@id": "m4i:dataType"
+    },
+    "name": {
+      "@id": "schema:name"
+    },
+    "description": {
+      "@id": "schema:description"
+    },
+    "datePublished": {
+      "@id": "schema:datePublished"
+    },
+    "license": {
+      "@id": "schema:license"
+    },
+    "hasPart": {
+      "@id": "schema:hasPart"
+    },
+    "about": {
+      "@id": "schema:about"
+    },
+    "conformsTo": {
+      "@id": "dcterms:conformsTo"
+    },
+    "author": {
+      "@id": "schema:author"
+    },
+    "publisher": {
+      "@id": "schema:publisher"
+    },
+    "codeRepository": {
+      "@id": "schema:codeRepository"
+    },
+    "softwareRequirements": {
+      "@id": "schema:softwareRequirements"
+    }
+  },
+  "@graph": [
+    {
+      "@id": "ro-crate-metadata.json",
+      "@type": "schema:CreativeWork",
+      "conformsTo": {
+        "@id": "https://w3id.org/ro/crate/1.1"
+      },
+      "about": {
+        "@id": "./"
+      }
+    },
+    {
+      "@id": "./",
+      "@type": "schema:Dataset",
+      "name": "taylor couette problem",
+      "description": "\\ingroup NavierStokesTests\n\\brief Taylor-Couette flow between two concentric rotating cylinders\n\nThe inner cylinder of radius \\f$ R_1 \\f$ rotates with the angular velocity \\f$ \\Omega_1 \\f$,\nthe outer cylinder of radius \\f$ R_2 \\f$ with \\f$ \\Omega_2 \\f$. The circular Couette flow\n\\f$ u_\\theta = A r + B/r \\f$ with\n\\f$ A = (\\Omega_2 R_2^2 - \\Omega_1 R_1^2)/(R_2^2 - R_1^2) \\f$ and\n\\f$ B = (\\Omega_1 - \\Omega_2) R_1^2 R_2^2/(R_2^2 - R_1^2) \\f$\nis a steady solution of the Navier-Stokes equations, and the pressure follows from\n\\f$ \\partial p/\\partial r = \\rho u_\\theta^2/r \\f$ \\cite taylor1923.\nThe velocity is prescribed on both cylinders.",
+      "datePublished": "2026-11-06",
+      "license": {
+        "@id": "https://spdx.org/licenses/GPL-3.0-or-later.html"
+      },
+      "hasPart": [
+        {
+          "@id": "local:bm-taylor_couette_problem"
+        },
+        {
+          "@id": "local:parameter_file_object"
+        },
+        {
+          "@id": "local:summary_file_object"
+        }
+      ],
+      "codeRepository": "https://github.com/Simulation-Benchmarks/benchmantic.git"
+    },
+    {
+      "@id": "local:bm-taylor_couette_problem",
+      "@type": "m4i:Benchmark",
+      "label": "taylor couette problem",
+      "dcterms:description": "\\ingroup NavierStokesTests\n\\brief Taylor-Couette flow between two concentric rotating cylinders\n\nThe inner cylinder of radius \\f$ R_1 \\f$ rotates with the angular velocity \\f$ \\Omega_1 \\f$,\nthe outer cylinder of radius \\f$ R_2 \\f$ with \\f$ \\Omega_2 \\f$. The circular Couette flow\n\\f$ u_\\theta = A r + B/r \\f$ with\n\\f$ A = (\\Omega_2 R_2^2 - \\Omega_1 R_1^2)/(R_2^2 - R_1^2) \\f$ and\n\\f$ B = (\\Omega_1 - \\Omega_2) R_1^2 R_2^2/(R_2^2 - R_1^2) \\f$\nis a steady solution of the Navier-Stokes equations, and the pressure follows from\n\\f$ \\partial p/\\partial r = \\rho u_\\theta^2/r \\f$ \\cite taylor1923.\nThe velocity is prescribed on both cylinders.",
+      "investigates": {
+        "@id": "https://portal.mardi4nfdi.de/entity/Q6830614"
+      },
+      "uses": {
+        "@id": "https://portal.mardi4nfdi.de/entity/Q6830616"
+      },
+      "evaluates": [
+        {
+          "@id": "local:metric_l2_error_pressure_rel"
+        },
+        {
+          "@id": "local:metric_l2_error_velocity_rel"
+        },
+        {
+          "@id": "local:metric_l2_error_pressure"
+        },
+        {
+          "@id": "local:metric_l2_error_velocity"
+        }
+      ],
+      "has parameter set": [
+        {
+          "@id": "local:configuration_16x128"
+        },
+        {
+          "@id": "local:configuration_32x256"
+        },
+        {
+          "@id": "local:configuration_64x512"
+        }
+      ],
+      "describedAsDocumentedBy": {
+        "@id": "local:publication"
+      },
+      "schema:version": "1.0.0"
+    },
+    {
+      "@id": "local:extract_l2_error_pressure_rel",
+      "@type": "cr:Extract",
+      "jsonPath": "/l2_error_pressure_rel"
+    },
+    {
+      "@id": "local:metric_l2_error_pressure_rel",
+      "@type": "numerical variable",
+      "label": "l2_error_pressure_rel",
+      "dcterms:description": "Relative L2 norm of the error between the computed pressure field and the analytical solution; expressed as a dimensionless ratio of the error norm to the reference norm.",
+      "schema:alternateName": "pressure_l2_relative_error",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/DimensionlessRatio"
+      }
+    },
+    {
+      "@id": "local:field_l2_error_pressure_rel",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Double"
+      },
+      "represents": {
+        "@id": "local:metric_l2_error_pressure_rel"
+      },
+      "source": {
+        "@id": "local:source_l2_error_pressure_rel"
+      }
+    },
+    {
+      "@id": "local:source_l2_error_pressure_rel",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_l2_error_pressure_rel"
+      },
+      "file object": {
+        "@id": "local:summary_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_l2_error_velocity_rel",
+      "@type": "cr:Extract",
+      "jsonPath": "/l2_error_velocity_rel"
+    },
+    {
+      "@id": "local:metric_l2_error_velocity_rel",
+      "@type": "numerical variable",
+      "label": "l2_error_velocity_rel",
+      "dcterms:description": "Relative L2 norm of the error between the computed velocity field and the analytical solution; expressed as a dimensionless ratio of the error norm to the reference norm.",
+      "schema:alternateName": "velocity_l2_relative_error",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/DimensionlessRatio"
+      }
+    },
+    {
+      "@id": "local:field_l2_error_velocity_rel",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Double"
+      },
+      "represents": {
+        "@id": "local:metric_l2_error_velocity_rel"
+      },
+      "source": {
+        "@id": "local:source_l2_error_velocity_rel"
+      }
+    },
+    {
+      "@id": "local:source_l2_error_velocity_rel",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_l2_error_velocity_rel"
+      },
+      "file object": {
+        "@id": "local:summary_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_l2_error_pressure",
+      "@type": "cr:Extract",
+      "jsonPath": "/l2_error_pressure"
+    },
+    {
+      "@id": "local:metric_l2_error_pressure",
+      "@type": "numerical variable",
+      "label": "l2_error_pressure",
+      "dcterms:description": "Absolute L2 norm of the pressure error (difference between computed and analytical pressure); retains the SI unit of pressure, pascal.",
+      "schema:alternateName": "pressure_l2_absolute_error",
+      "has unit": {
+        "@id": "unit:PA"
+      },
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/Pressure"
+      }
+    },
+    {
+      "@id": "local:field_l2_error_pressure",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Double"
+      },
+      "represents": {
+        "@id": "local:metric_l2_error_pressure"
+      },
+      "source": {
+        "@id": "local:source_l2_error_pressure"
+      }
+    },
+    {
+      "@id": "local:source_l2_error_pressure",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_l2_error_pressure"
+      },
+      "file object": {
+        "@id": "local:summary_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_l2_error_velocity",
+      "@type": "cr:Extract",
+      "jsonPath": "/l2_error_velocity"
+    },
+    {
+      "@id": "local:metric_l2_error_velocity",
+      "@type": "numerical variable",
+      "label": "l2_error_velocity",
+      "dcterms:description": "Absolute L2 norm of the velocity error (difference between computed and analytical velocity); retains the SI unit of velocity, metres per second.",
+      "schema:alternateName": "velocity_l2_absolute_error",
+      "has unit": {
+        "@id": "unit:M-PER-SEC"
+      },
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/Velocity"
+      }
+    },
+    {
+      "@id": "local:field_l2_error_velocity",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Double"
+      },
+      "represents": {
+        "@id": "local:metric_l2_error_velocity"
+      },
+      "source": {
+        "@id": "local:source_l2_error_velocity"
+      }
+    },
+    {
+      "@id": "local:source_l2_error_velocity",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_l2_error_velocity"
+      },
+      "file object": {
+        "@id": "local:summary_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_radii",
+      "@type": "cr:Extract",
+      "jsonPath": "/radii"
+    },
+    {
+      "@id": "local:variable_radii_1p0_2p0",
+      "label": "radii",
+      "dcterms:description": "Read into a std::vector<Scalar> named `radii`; the two values represent the inner and outer cylinder radii in the Taylor\u2011Couette benchmark, which are lengths measured in metres.",
+      "has unit": {
+        "@id": "unit:M"
+      },
+      "@type": "text parameter",
+      "has string value": "1.0 2.0",
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/Length"
+      }
+    },
+    {
+      "@id": "local:field_radii_1p0_2p0",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Float"
+      },
+      "represents": {
+        "@id": "local:variable_radii_1p0_2p0"
+      },
+      "source": {
+        "@id": "local:source_radii_1p0_2p0"
+      }
+    },
+    {
+      "@id": "local:source_radii_1p0_2p0",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_radii"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_cells_radial",
+      "@type": "cr:Extract",
+      "jsonPath": "/cells_radial"
+    },
+    {
+      "@id": "local:variable_cells_radial_16",
+      "label": "cells_radial",
+      "dcterms:description": "Number of cells in the radial direction; a pure count without physical units.",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "@type": "numerical parameter",
+      "has numerical value": 16,
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/Count"
+      }
+    },
+    {
+      "@id": "local:field_cells_radial_16",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Integer"
+      },
+      "represents": {
+        "@id": "local:variable_cells_radial_16"
+      },
+      "source": {
+        "@id": "local:source_cells_radial_16"
+      }
+    },
+    {
+      "@id": "local:source_cells_radial_16",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_cells_radial"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_cells_azimuthal",
+      "@type": "cr:Extract",
+      "jsonPath": "/cells_azimuthal"
+    },
+    {
+      "@id": "local:variable_cells_azimuthal_128",
+      "label": "cells_azimuthal",
+      "dcterms:description": "Number of cells in the circumferential (theta) direction; a dimensionless count.",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "@type": "numerical parameter",
+      "has numerical value": 128,
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/Count"
+      }
+    },
+    {
+      "@id": "local:field_cells_azimuthal_128",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Integer"
+      },
+      "represents": {
+        "@id": "local:variable_cells_azimuthal_128"
+      },
+      "source": {
+        "@id": "local:source_cells_azimuthal_128"
+      }
+    },
+    {
+      "@id": "local:source_cells_azimuthal_128",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_cells_azimuthal"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_global_refinement",
+      "@type": "cr:Extract",
+      "jsonPath": "/global_refinement"
+    },
+    {
+      "@id": "local:variable_global_refinement_0",
+      "label": "global_refinement",
+      "dcterms:description": "Integer specifying how many times the coarse grid is globally refined; a pure count.",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "@type": "numerical parameter",
+      "has numerical value": 0,
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/Count"
+      }
+    },
+    {
+      "@id": "local:field_global_refinement_0",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Integer"
+      },
+      "represents": {
+        "@id": "local:variable_global_refinement_0"
+      },
+      "source": {
+        "@id": "local:source_global_refinement_0"
+      }
+    },
+    {
+      "@id": "local:source_global_refinement_0",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_global_refinement"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_inner_angular_velocity",
+      "@type": "cr:Extract",
+      "jsonPath": "/inner_angular_velocity"
+    },
+    {
+      "@id": "local:variable_inner_angular_velocity_100p0",
+      "label": "inner_angular_velocity",
+      "dcterms:description": "Read into variable `omega1` of type Scalar; represents the angular velocity of the inner cylinder, measured in radians per second.",
+      "has unit": {
+        "@id": "unit:RAD-PER-SEC"
+      },
+      "@type": "numerical parameter",
+      "has numerical value": 100.0,
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/AngularVelocity"
+      }
+    },
+    {
+      "@id": "local:field_inner_angular_velocity_100p0",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Float"
+      },
+      "represents": {
+        "@id": "local:variable_inner_angular_velocity_100p0"
+      },
+      "source": {
+        "@id": "local:source_inner_angular_velocity_100p0"
+      }
+    },
+    {
+      "@id": "local:source_inner_angular_velocity_100p0",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_inner_angular_velocity"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_outer_angular_velocity",
+      "@type": "cr:Extract",
+      "jsonPath": "/outer_angular_velocity"
+    },
+    {
+      "@id": "local:variable_outer_angular_velocity_0p0",
+      "label": "outer_angular_velocity",
+      "dcterms:description": "Read into variable `omega2` of type Scalar; represents the angular velocity of the outer cylinder, measured in radians per second.",
+      "has unit": {
+        "@id": "unit:RAD-PER-SEC"
+      },
+      "@type": "numerical parameter",
+      "has numerical value": 0.0,
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/AngularVelocity"
+      }
+    },
+    {
+      "@id": "local:field_outer_angular_velocity_0p0",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Float"
+      },
+      "represents": {
+        "@id": "local:variable_outer_angular_velocity_0p0"
+      },
+      "source": {
+        "@id": "local:source_outer_angular_velocity_0p0"
+      }
+    },
+    {
+      "@id": "local:source_outer_angular_velocity_0p0",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_outer_angular_velocity"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:extract_simulation_name",
+      "@type": "cr:Extract",
+      "jsonPath": "/simulation_name"
+    },
+    {
+      "@id": "local:variable_simulation_name_taylorcouette_16x128",
+      "label": "simulation_name",
+      "dcterms:description": "A free\u2011form identifier for the simulation case; stored as a string with no physical units.",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "@type": "text parameter",
+      "has string value": "taylorcouette_16x128"
+    },
+    {
+      "@id": "local:field_simulation_name_taylorcouette_16x128",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:String"
+      },
+      "represents": {
+        "@id": "local:variable_simulation_name_taylorcouette_16x128"
+      },
+      "source": {
+        "@id": "local:source_simulation_name_taylorcouette_16x128"
+      }
+    },
+    {
+      "@id": "local:source_simulation_name_taylorcouette_16x128",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_simulation_name"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:configuration_16x128",
+      "@type": "m4i:ParameterSet",
+      "label": "16 cells radial, 128 cells azimuthal, global_refinement 0",
+      "identifier": "16x128",
+      "has part": [
+        {
+          "@id": "local:variable_radii_1p0_2p0"
+        },
+        {
+          "@id": "local:variable_cells_radial_16"
+        },
+        {
+          "@id": "local:variable_cells_azimuthal_128"
+        },
+        {
+          "@id": "local:variable_global_refinement_0"
+        },
+        {
+          "@id": "local:variable_inner_angular_velocity_100p0"
+        },
+        {
+          "@id": "local:variable_outer_angular_velocity_0p0"
+        },
+        {
+          "@id": "local:variable_simulation_name_taylorcouette_16x128"
+        }
+      ]
+    },
+    {
+      "@id": "local:variable_global_refinement_1",
+      "label": "global_refinement",
+      "dcterms:description": "Integer specifying how many times the coarse grid is globally refined; a pure count.",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "@type": "numerical parameter",
+      "has numerical value": 1,
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/Count"
+      }
+    },
+    {
+      "@id": "local:field_global_refinement_1",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Integer"
+      },
+      "represents": {
+        "@id": "local:variable_global_refinement_1"
+      },
+      "source": {
+        "@id": "local:source_global_refinement_1"
+      }
+    },
+    {
+      "@id": "local:source_global_refinement_1",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_global_refinement"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:variable_simulation_name_taylorcouette_32x256",
+      "label": "simulation_name",
+      "dcterms:description": "A free\u2011form identifier for the simulation case; stored as a string with no physical units.",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "@type": "text parameter",
+      "has string value": "taylorcouette_32x256"
+    },
+    {
+      "@id": "local:field_simulation_name_taylorcouette_32x256",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:String"
+      },
+      "represents": {
+        "@id": "local:variable_simulation_name_taylorcouette_32x256"
+      },
+      "source": {
+        "@id": "local:source_simulation_name_taylorcouette_32x256"
+      }
+    },
+    {
+      "@id": "local:source_simulation_name_taylorcouette_32x256",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_simulation_name"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:configuration_32x256",
+      "@type": "m4i:ParameterSet",
+      "label": "16 cells radial, 128 cells azimuthal, global_refinement 1",
+      "identifier": "32x256",
+      "has part": [
+        {
+          "@id": "local:variable_radii_1p0_2p0"
+        },
+        {
+          "@id": "local:variable_cells_radial_16"
+        },
+        {
+          "@id": "local:variable_cells_azimuthal_128"
+        },
+        {
+          "@id": "local:variable_global_refinement_1"
+        },
+        {
+          "@id": "local:variable_inner_angular_velocity_100p0"
+        },
+        {
+          "@id": "local:variable_outer_angular_velocity_0p0"
+        },
+        {
+          "@id": "local:variable_simulation_name_taylorcouette_32x256"
+        }
+      ]
+    },
+    {
+      "@id": "local:variable_global_refinement_2",
+      "label": "global_refinement",
+      "dcterms:description": "Integer specifying how many times the coarse grid is globally refined; a pure count.",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "@type": "numerical parameter",
+      "has numerical value": 2,
+      "has quantity kind": {
+        "@id": "http://qudt.org/vocab/quantitykind/Count"
+      }
+    },
+    {
+      "@id": "local:field_global_refinement_2",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:Integer"
+      },
+      "represents": {
+        "@id": "local:variable_global_refinement_2"
+      },
+      "source": {
+        "@id": "local:source_global_refinement_2"
+      }
+    },
+    {
+      "@id": "local:source_global_refinement_2",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_global_refinement"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:variable_simulation_name_taylorcouette_64x512",
+      "label": "simulation_name",
+      "dcterms:description": "A free\u2011form identifier for the simulation case; stored as a string with no physical units.",
+      "has unit": {
+        "@id": "unit:UNITLESS"
+      },
+      "@type": "text parameter",
+      "has string value": "taylorcouette_64x512"
+    },
+    {
+      "@id": "local:field_simulation_name_taylorcouette_64x512",
+      "@type": "Field",
+      "dataType": {
+        "@id": "schema:String"
+      },
+      "represents": {
+        "@id": "local:variable_simulation_name_taylorcouette_64x512"
+      },
+      "source": {
+        "@id": "local:source_simulation_name_taylorcouette_64x512"
+      }
+    },
+    {
+      "@id": "local:source_simulation_name_taylorcouette_64x512",
+      "@type": "cr:DataSource",
+      "extract": {
+        "@id": "local:extract_simulation_name"
+      },
+      "file object": {
+        "@id": "local:parameter_file_object"
+      }
+    },
+    {
+      "@id": "local:configuration_64x512",
+      "@type": "m4i:ParameterSet",
+      "label": "16 cells radial, 128 cells azimuthal, global_refinement 2",
+      "identifier": "64x512",
+      "has part": [
+        {
+          "@id": "local:variable_radii_1p0_2p0"
+        },
+        {
+          "@id": "local:variable_cells_radial_16"
+        },
+        {
+          "@id": "local:variable_cells_azimuthal_128"
+        },
+        {
+          "@id": "local:variable_global_refinement_2"
+        },
+        {
+          "@id": "local:variable_inner_angular_velocity_100p0"
+        },
+        {
+          "@id": "local:variable_outer_angular_velocity_0p0"
+        },
+        {
+          "@id": "local:variable_simulation_name_taylorcouette_64x512"
+        }
+      ]
+    },
+    {
+      "@id": "https://portal.mardi4nfdi.de/entity/Q6830614",
+      "@type": "mathmod:ResearchProblem",
+      "label": "Taylor\u2013Couette flow"
+    },
+    {
+      "@id": "https://portal.mardi4nfdi.de/entity/Q6830616",
+      "@type": "mathmod:MathematicalModel",
+      "label": "Taylor\u2013Couette model"
+    },
+    {
+      "@id": "local:publication",
+      "@type": "mathmod:Publication",
+      "label": "Publication"
+    },
+    {
+      "@id": "local:software",
+      "@type": "tool",
+      "label": "DuMux"
+    },
+    {
+      "@id": "local:parameter_file_object",
+      "@type": "cr:FileObject",
+      "label": "parameter.json"
+    },
+    {
+      "@id": "local:summary_file_object",
+      "@type": "cr:FileObject",
+      "label": "solution_metrics.json"
+    },
+    {
+      "@id": "local:processing_step_16x128",
+      "@type": "processing step",
+      "label": "Run simulation (16x128)",
+      "has configuration": {
+        "@id": "local:configuration_16x128"
+      },
+      "has input": {
+        "@id": "local:parameter_file_object"
+      },
+      "has output": {
+        "@id": "local:summary_file_object"
+      },
+      "has employed tool": {
+        "@id": "local:software"
+      }
+    },
+    {
+      "@id": "local:processing_step_32x256",
+      "@type": "processing step",
+      "label": "Run simulation (32x256)",
+      "has configuration": {
+        "@id": "local:configuration_32x256"
+      },
+      "has input": {
+        "@id": "local:parameter_file_object"
+      },
+      "has output": {
+        "@id": "local:summary_file_object"
+      },
+      "has employed tool": {
+        "@id": "local:software"
+      }
+    },
+    {
+      "@id": "local:processing_step_64x512",
+      "@type": "processing step",
+      "label": "Run simulation (64x512)",
+      "has configuration": {
+        "@id": "local:configuration_64x512"
+      },
+      "has input": {
+        "@id": "local:parameter_file_object"
+      },
+      "has output": {
+        "@id": "local:summary_file_object"
+      },
+      "has employed tool": {
+        "@id": "local:software"
+      }
+    },
+    {
+      "@id": "https://spdx.org/licenses/GPL-3.0-or-later.html",
+      "@type": "schema:CreativeWork",
+      "name": "GPL-3.0-or-later"
+    }
+  ]
+}
